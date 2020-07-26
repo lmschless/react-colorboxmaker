@@ -7,9 +7,17 @@ export default class BoxList extends Component {
 		super(props);
 
 		this.state = {
-			boxes: [ { width: 10, height: 40, color: 'orange' } ]
+			boxes: []
 		};
 	}
+
+	remove = (id) => {
+		// create a new array that does NOT contain the box object with an id
+		// that matches the id passed in (corresponds to the specific X button clicked)
+		this.setState({
+			boxes: this.state.boxes.filter((box) => box.id !== id)
+		});
+	};
 
 	create = (newBox) => {
 		this.setState({
@@ -23,7 +31,14 @@ export default class BoxList extends Component {
 				<h1>Color Box Maker</h1>
 				<NewBoxForm createBox={this.create} />
 				{this.state.boxes.map((box) => (
-					<Box width={box.width} height={box.height} color={box.color} />
+					<Box
+						key={box.id}
+						id={box.id}
+						width={box.width}
+						height={box.height}
+						color={box.color}
+						remove={() => this.remove(box.id)}
+					/>
 				))}
 			</div>
 		);

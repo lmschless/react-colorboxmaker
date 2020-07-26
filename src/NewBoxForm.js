@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 } from 'uuid';
 
 export default class NewBoxForm extends Component {
 	constructor(props) {
@@ -19,7 +20,13 @@ export default class NewBoxForm extends Component {
 
 	handleSubmit = (evt) => {
 		evt.preventDefault();
-		this.props.createBox(this.state);
+		// create variable on submit to add a unique ID to every box.
+		// ID will be used for selecting which object to remove from state/window.
+		const newBox = {
+			...this.state,
+			id: v4()
+		};
+		this.props.createBox(newBox);
 		this.setState({ height: '', width: '', color: '' });
 	};
 

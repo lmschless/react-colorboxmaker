@@ -11,6 +11,7 @@ export default class Box extends Component {
 						backgroundColor: this.props.color
 					}}
 				/>
+				<button onClick={this.props.remove}>X</button>
 			</div>
 		);
 	}
