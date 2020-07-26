@@ -11,11 +11,17 @@ export default class BoxList extends Component {
 		};
 	}
 
+	create = (newBox) => {
+		this.setState({
+			boxes: [ ...this.state.boxes, newBox ]
+		});
+	};
+
 	render() {
 		return (
 			<div>
 				<h1>Color Box Maker</h1>
-				<NewBoxForm />
+				<NewBoxForm createBox={this.create} />
 				{this.state.boxes.map((box) => (
 					<Box width={box.width} height={box.height} color={box.color} />
 				))}
